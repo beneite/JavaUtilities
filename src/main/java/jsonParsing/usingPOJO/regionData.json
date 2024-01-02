@@ -1,0 +1,36 @@
+{
+  "description": "Map containing Country, capital, currency, and some States of that Country",
+  "region": "Asia",
+  "countries": [
+    {
+      "country": "India",
+      "data": {
+        "capital": "New Delhi",
+        "mintemp": 6,
+        "maxtemp": 45,
+        "currency": "Rupee",
+        "population": 120
+      }
+    },
+    {
+      "country": "Nepal",
+      "data": {
+        "capital": "Katmandu",
+        "mintemp": 9,
+        "maxtemp": 23,
+        "currency": "Nepalese rupee",
+        "population": 50
+      }
+    },
+    {
+      "country": "SriLanka",
+      "data": {
+        "capital": "Colombo",
+        "mintemp": 9,
+        "maxtemp": 20,
+        "currency": "Sri Lakan rupee",
+        "population": 80
+      }
+    }
+  ]
+}

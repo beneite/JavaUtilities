@@ -32,7 +32,7 @@ public class RunTimeJson {
         JSONObject stringToJson = (JSONObject) parser.parse(str);
         System.out.printf("String to Json:"+stringToJson.toString());
 
-        //#3.create the same json as present in src/main/java/jsonParsing/usingJsonObject/testdata.json
+        //#3.create the same json as present in src/main/java/jsonParsing/usingJsonObject/regionData.json
 
     }
 }
