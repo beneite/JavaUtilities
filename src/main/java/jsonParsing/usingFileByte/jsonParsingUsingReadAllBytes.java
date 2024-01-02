@@ -14,7 +14,7 @@ public class jsonParsingUsingReadAllBytes {
 
     @Test
     public void fetchingJsonFile() throws IOException, ParseException {
-        byte[] file = Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/main/java/jsonParsing/usingJsonObject/regionData.json"));
+        byte[] file = Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/src/main/java/jsonParsing/usingJsonObject/testData.json"));
         String fileContent = new String(file);
         System.out.println(fileContent);    // fileContent can be passed to ...given().body(fileContent).... since body take json as a string parameter
 

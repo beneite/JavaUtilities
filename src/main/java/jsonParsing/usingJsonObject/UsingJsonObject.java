@@ -16,7 +16,7 @@ public class UsingJsonObject {
     public static void main(String[] args) throws IOException, ParseException {
 
         JSONParser parser = new JSONParser();
-        FileReader file = new FileReader(System.getProperty("user.dir")+"/src/main/java/jsonParsing/usingJsonObject/regionData.json");
+        FileReader file = new FileReader(System.getProperty("user.dir")+"/src/main/java/jsonParsing/usingJsonObject/testData.json");
         Object obj = parser.parse(file);
         JSONObject data = (JSONObject) obj;
 
