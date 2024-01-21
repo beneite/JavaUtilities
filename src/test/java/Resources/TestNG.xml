@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Json parsing package">
+    <test name="Regression">
+        <classes>
+            <class name="jsonParsing.usingFileByte.jsonParsingUsingReadAllBytes"/>
+            <class name="jsonParsing.usingJacksonApi.ObjectToString"/>
+            <class name="jsonParsing.usingJacksonApi.WriteJsonToFile"/>
+            <class name="jsonParsing.usingJacksonApi.JsonFileDataToObject"/>
+            <class name="jsonParsing.usingJsonObject.RunTimeJson"/>
+            <class name="jsonParsing.usingJsonObject.UsingJsonObject"/>
+            <class name="jsonParsing.usingPOJO.SerializeTest"/>
+            <class name="jsonParsing.usingPOJO.DeserializationTest"/>
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->

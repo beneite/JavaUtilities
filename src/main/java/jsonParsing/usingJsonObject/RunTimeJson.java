@@ -6,9 +6,11 @@ package jsonParsing.usingJsonObject;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.testng.annotations.Test;
 
 public class RunTimeJson {
-    public static void main(String[] args) throws ParseException {
+    @Test
+    public void runTime() throws ParseException {
 
         JSONObject customJson = new JSONObject();
         customJson.put("Description","Map containing Country, Capital, Currency, and some States of that Country");
