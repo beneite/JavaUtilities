@@ -7,13 +7,15 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.testng.annotations.Test;
 
 import java.io.FileReader;
 import java.io.IOException;
 
 public class UsingJsonObject {
 
-    public static void main(String[] args) throws IOException, ParseException {
+    @Test
+    public void usingJsonObject() throws IOException, ParseException {
 
         JSONParser parser = new JSONParser();
         FileReader file = new FileReader(System.getProperty("user.dir")+"/src/main/java/jsonParsing/usingJsonObject/testData.json");
