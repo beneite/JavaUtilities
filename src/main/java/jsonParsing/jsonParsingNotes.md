@@ -10,6 +10,7 @@
 ## **Jackson API** 
 > - Jackson is a very popular and efficient java based library to serialize or map java objects to JSON and vice versa.
 > - Jackson is a Java-based library.
+> - https://www.concretepage.com/jackson-api/jackson-jsonproperty-and-jsonalias-example
 > -      jackson-core, jackson-databind, jackson-annotations dependencies were used.
 
 
