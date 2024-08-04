@@ -5,12 +5,11 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class jsonParsingUsingReadAllBytes {
+public class jsonParsingUsingReadAllBytesTest {
 
     @Test
     public void fetchingJsonFile() throws IOException, ParseException {

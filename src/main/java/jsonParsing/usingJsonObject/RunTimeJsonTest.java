@@ -8,7 +8,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.testng.annotations.Test;
 
-public class RunTimeJson {
+public class RunTimeJsonTest {
     @Test
     public void runTime() throws ParseException {
 

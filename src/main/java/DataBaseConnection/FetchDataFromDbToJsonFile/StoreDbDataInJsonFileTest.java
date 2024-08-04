@@ -29,7 +29,8 @@ public class StoreDbDataInJsonFileTest {
 
         // calling constructor to initialise the DB connection
         new DbConnectionUtil("localhost", "3306", "dbCOnnection", "root", "Ashish@123");
-        ResultSet resultSet = executeQuery("select * from employeeTable where Limit 3;");
+        ResultSet resultSet = executeQuery("select * from employeeTable Limit 3;");
+
         int i=0;
         while(resultSet.next()){
             EmployeeDetails employeeDetails = new EmployeeDetails();
@@ -41,7 +42,7 @@ public class StoreDbDataInJsonFileTest {
             empList.add(employeeDetails);
             i++;
         }
-        jsonFileContent.setNoOfRecords(i);
+        jsonFileContent.setNoOfRecords(i);      // setting the no of records in data
         ObjectMapper objectMapper = new ObjectMapper();
         // file will be stored in the same root module location
         objectMapper.writeValue(new File(System.getProperty("user.dir")+"/src/main/java/DataBaseConnection/FetchDataFromDbToJsonFile/dbToJson.json"), jsonFileContent);
