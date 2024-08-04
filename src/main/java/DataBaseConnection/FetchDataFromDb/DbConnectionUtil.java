@@ -1,4 +1,4 @@
-package DataBaseConnection.FetchDataFromDbToPojo;
+package DataBaseConnection.FetchDataFromDb;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

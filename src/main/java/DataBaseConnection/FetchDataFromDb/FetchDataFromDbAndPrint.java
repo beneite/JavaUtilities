@@ -1,4 +1,4 @@
-package DataBaseConnection.FetchDataFromDbToPojo;
+package DataBaseConnection.FetchDataFromDb;
 
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
@@ -6,15 +6,16 @@ import org.testng.annotations.Test;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static DataBaseConnection.FetchDataFromDbToPojo.DbConnectionUtil.closeDbConnection;
-import static DataBaseConnection.FetchDataFromDbToPojo.DbConnectionUtil.executeQuery;
+import static DataBaseConnection.FetchDataFromDb.DbConnectionUtil.closeDbConnection;
+import static DataBaseConnection.FetchDataFromDb.DbConnectionUtil.executeQuery;
 
-public class FetchDataFromDbAndStoreInPojo {
+public class FetchDataFromDbAndPrint {
 
     @Test
-    public void getDataFromDB() throws SQLException {
+    public void printDataFromDB() throws SQLException {
         new DbConnectionUtil("localhost", "3306", "dbCOnnection", "root", "Ashish@123");
         ResultSet result = executeQuery("select * from employeeTable;");
+        System.out.println("Printing the data from DB");
         while (result.next()) {
             System.out.println(result.getInt(1));
             System.out.println(result.getString(2));

@@ -3,9 +3,10 @@
 > [!NOTE]
 > Please go through the below table:
 
-| **_Utility_** |    **_Package Name_**     |                                **_Topics covered_**                                 |
-|---------------|:-------------------------:|:-----------------------------------------------------------------------------------:|
-| Json Paring   | src/main/java/jsonParsing | JSONObject, POJO, serialization, deserialization, Object Mapper, Jackson API<br/> - | 
+| **_Utility_**       |        **_Package Name_**        |                                      **_Topics covered_**                                      |
+|---------------------|:--------------------------------:|:----------------------------------------------------------------------------------------------:|
+| Json Paring         |    src/main/java/jsonParsing     |    JSONObject, POJO, [serialization](https://www.geeksforgeeks.org/serialization-in-java/), deserialization, Object Mapper, Jackson API<br/> -     | 
+| Database Connection | src/main/java/DataBaseConnection | how to establish DB connection, Fetching data from DB, Storing fetched Data into *.json<br/> - | 
 
 > [!IMPORTANT]
 > Points to remember:
