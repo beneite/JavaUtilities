@@ -9,6 +9,10 @@ import java.util.List;
 
 public class ObjectToStringTest {
 
+    /**
+     * This method will convert the Java Object to Json format and then to string
+     * @throws JsonProcessingException
+     */
     @Test
     public void ConvertObjectToJsonString() throws JsonProcessingException {
         //#1. Creating object for data

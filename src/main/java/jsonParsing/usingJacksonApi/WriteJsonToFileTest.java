@@ -12,6 +12,10 @@ import java.util.List;
 
 public class WriteJsonToFileTest {
 
+    /**
+     * this method will convert the Java object to Json Object and then it will write the json into a file.
+     * @throws IOException
+     */
     @Test
     public void writeJson() throws IOException {
         //#1. Creating object for data

@@ -3,20 +3,23 @@
 <suite name="Json parsing package">
     <test name="Json Test files">
         <classes>
+            <class name="jsonParsing.ConvertJsonFileToExcel.ConvertJsonToExcelTest"/>
+            <class name="jsonParsing.using_org_json.ConvertJsonStringToJavaObjectTest"/>
             <class name="jsonParsing.usingFileByte.jsonParsingUsingReadAllBytesTest"/>
             <class name="jsonParsing.usingJacksonApi.ObjectToStringTest"/>
             <class name="jsonParsing.usingJacksonApi.WriteJsonToFileTest"/>
             <class name="jsonParsing.usingJacksonApi.JsonFileDataToObjectTest"/>
-            <class name="jsonParsing.usingJsonObject.RunTimeJsonTest"/>
-            <class name="jsonParsing.usingJsonObject.UsingJsonObjectTest"/>
+            <class name="jsonParsing.usingJacksonApi.ConvertJsonResponseIntoJavaObjectTest"/>
+            <class name="jsonParsing.using_org_json_simple.RunTimeJsonTest"/>
+            <class name="jsonParsing.using_org_json_simple.UsingJsonObjectTest"/>
             <class name="jsonParsing.usingPOJO.SerializeTest"/>
             <class name="jsonParsing.usingPOJO.DeserializationTest"/>
         </classes>
     </test>
     <test name="DB connection Test files">
         <classes>
-            <class name="DataBaseConnection.FetchDataFromDb.FetchDataFromDbAndPrintTest"></class>
-            <class name="DataBaseConnection.FetchDataFromDbToJsonFile.StoreDbDataInJsonFileTest"></class>
+            <class name="DataBaseConnection.FetchDataFromDb.FetchDataFromDbAndPrintTest"/>
+            <class name="DataBaseConnection.FetchDataFromDbToJsonFile.StoreDbDataInJsonFileTest"/>
         </classes>
     </test>
 </suite> <!-- Suite -->
