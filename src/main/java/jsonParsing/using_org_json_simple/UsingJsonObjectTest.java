@@ -1,7 +1,7 @@
 /**
  * program to parse .json file and perform various types of operations...
  */
-package jsonParsing.usingJsonObject;
+package jsonParsing.using_org_json_simple;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -18,7 +18,7 @@ public class UsingJsonObjectTest {
     public void usingJsonObject() throws IOException, ParseException {
 
         JSONParser parser = new JSONParser();
-        FileReader file = new FileReader(System.getProperty("user.dir")+"/src/main/java/jsonParsing/usingJsonObject/testData.json");
+        FileReader file = new FileReader(System.getProperty("user.dir")+"/src/main/java/jsonParsing/using_org_json_simple/testdata.json");
         Object obj = parser.parse(file);
         JSONObject data = (JSONObject) obj;
 
