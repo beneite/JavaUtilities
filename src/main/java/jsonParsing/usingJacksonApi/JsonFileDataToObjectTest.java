@@ -9,6 +9,10 @@ import java.nio.file.Paths;
 
 public class JsonFileDataToObjectTest {
 
+    /**
+     * This method will convert the Json present in the file to Java Class Object (Deserialization)
+     * @throws IOException
+     */
     @Test
     public void convertingJsonToObject() throws IOException {
 
