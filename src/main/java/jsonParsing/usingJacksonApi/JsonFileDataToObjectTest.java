@@ -3,12 +3,11 @@ package jsonParsing.usingJacksonApi;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class JsonFileDataToObject {
+public class JsonFileDataToObjectTest {
 
     @Test
     public void convertingJsonToObject() throws IOException {

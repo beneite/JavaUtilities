@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class UsingJsonObject {
+public class UsingJsonObjectTest {
 
     @Test
     public void usingJsonObject() throws IOException, ParseException {
