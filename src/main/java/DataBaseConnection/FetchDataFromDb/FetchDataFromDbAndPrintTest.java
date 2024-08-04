@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import static DataBaseConnection.FetchDataFromDb.DbConnectionUtil.closeDbConnection;
 import static DataBaseConnection.FetchDataFromDb.DbConnectionUtil.executeQuery;
 
-public class FetchDataFromDbAndPrint {
+public class FetchDataFromDbAndPrintTest {
 
     @Test
     public void printDataFromDB() throws SQLException {

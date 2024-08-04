@@ -5,5 +5,4 @@
 >
 - Step 1. Add Dependency for mysql-connector-j
 - Step 2. Create utility method to establish connection [example](FetchDataFromDb/DbConnectionUtil.java)
-- Step 3. In class 
 

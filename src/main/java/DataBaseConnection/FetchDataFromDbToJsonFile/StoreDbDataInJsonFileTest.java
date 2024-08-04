@@ -14,15 +14,23 @@ import java.util.ArrayList;
 import static DataBaseConnection.FetchDataFromDb.DbConnectionUtil.closeDbConnection;
 import static DataBaseConnection.FetchDataFromDb.DbConnectionUtil.executeQuery;
 
-public class StoreDbDataInJsonFile {
+public class StoreDbDataInJsonFileTest {
 
+    /**
+     * This method will put the sql query data into json file along with the no of records.
+     * @throws SQLException
+     * @throws IOException
+     */
     @Test
     public void storeDbDataIntoJsonFile() throws SQLException, IOException {
-        ArrayList<EmployeeDetails> empList = new ArrayList<>();
+        ArrayList<EmployeeDetails> empList = new ArrayList<>();         // empList will be used to store all the query results
+        JsonFileContent jsonFileContent = new JsonFileContent();        //
+        jsonFileContent.setData(empList);
 
+        // calling constructor to initialise the DB connection
         new DbConnectionUtil("localhost", "3306", "dbCOnnection", "root", "Ashish@123");
-        ResultSet resultSet = executeQuery("select * from employeeTable;");
-
+        ResultSet resultSet = executeQuery("select * from employeeTable where Limit 3;");
+        int i=0;
         while(resultSet.next()){
             EmployeeDetails employeeDetails = new EmployeeDetails();
             employeeDetails.setEmployeeId(resultSet.getInt(1));
@@ -31,11 +39,12 @@ public class StoreDbDataInJsonFile {
             employeeDetails.setEmployeeDoj(resultSet.getDate(4));
 
             empList.add(employeeDetails);
+            i++;
         }
-
+        jsonFileContent.setNoOfRecords(i);
         ObjectMapper objectMapper = new ObjectMapper();
-        // file will be stored in the same root module location. open the file and see the json in arraylist.
-        objectMapper.writeValue(new File(System.getProperty("user.dir")+"/src/main/java/DataBaseConnection/FetchDataFromDbToJsonFile/dbToJson.json"),empList);
+        // file will be stored in the same root module location
+        objectMapper.writeValue(new File(System.getProperty("user.dir")+"/src/main/java/DataBaseConnection/FetchDataFromDbToJsonFile/dbToJson.json"), jsonFileContent);
     }
 
     @AfterTest
