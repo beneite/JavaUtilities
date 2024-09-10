@@ -16,14 +16,14 @@ public class UsingProcessBuilder {
     private final String shellScriptFilePath = System.getProperty("user.dir")+"/src/test/java/Resources/unixResources/simpleShellScript.sh";
 
     @Test
-    public void executeShellScriptTest() throws IOException, InterruptedException {
+    public void executeShellScriptUsingProcessBuilderTest() throws IOException, InterruptedException {
 
 
         ProcessBuilder processBuilder = new ProcessBuilder(shellScriptFilePath);
 
         // this will start the shell script execution
         Process processStart = processBuilder.start();
-        int exitCode = processStart.waitFor();
+        int returnCode = processStart.waitFor();
 
         // creating BufferedReader to read the execution
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(processStart.getInputStream()));
@@ -39,8 +39,8 @@ public class UsingProcessBuilder {
         System.out.println("output:");
         System.out.println(stringBuilder);
 
-        // exitCode should be 0 if the process is completed successfully
-        Assert.assertEquals(exitCode,0," The process was not completed successfully"+exitCode);
+        // returnCode should be 0 if the process is completed successfully
+        Assert.assertEquals(returnCode,0," The process was not completed successfully"+returnCode);
 
         // closing the bufferedReader to avoid memory leaks
         bufferedReader.close();
