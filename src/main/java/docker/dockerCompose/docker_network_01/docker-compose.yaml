@@ -1,0 +1,17 @@
+version: "3"
+services:
+  nginx-container:
+    image: nginx
+    ports:
+      - 8050:80
+  alpine-container:
+    image: alpine
+    depends_on:
+      - nginx-container
+    entrypoint: "ping nginx-container"    # pinging the service with name:nginx-container
+
+#In Docker Compose, when you define multiple services (like nginx-container and alpine-container in your YAML file) without specifying a network, Docker Compose automatically creates a default network for all the services in the same project. This means the services can communicate with each other by their service names, even without explicitly defining a network.
+#
+#How it Works:
+#By default, Docker Compose sets up an isolated bridge network for the services in the YAML file.
+#Both nginx-container and alpine-container will be placed on this default network, and they can communicate with each other using their service names as hostnames.
