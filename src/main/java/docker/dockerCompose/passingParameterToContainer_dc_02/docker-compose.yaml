@@ -1,0 +1,6 @@
+version: "3"
+services:
+  squareFinder:
+    image: beneite/docker_learning:ParameterToContainer
+    environment:
+      - NUM=5

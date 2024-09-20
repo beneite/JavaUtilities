@@ -12,6 +12,7 @@
 | Password Protection                                                          | src/main/java/Password_Protection |                                                                         - Password encryption & description<br/> - Use char[] instead of String to store Passwords                                                                          | 
 | [Unix Commands](src/main/java/unix_commands/lynxnotes.md)                    |    src/main/java/unix_commands    |                                                                                                            - Basic Unix commands                                                                                                            | 
 | Unix Playground                                                              |   src/main/java/unix_playground   | - Shell script execution([using process builder](src/main/java/unix_playground/shellScriptExecution/UsingProcessBuilder.java) , [using plexus utils](src/main/java/unix_playground/shellScriptExecution/UsingPlexusUtils.java), Using JSCH) | 
+| Docker                                                                       |       src/main/java/docker        |                                                                                      - How to create docker images <br/>- Docker compose yaml example <br/>                                                                                      | 
 
 > [!IMPORTANT]
 > Points to remember:

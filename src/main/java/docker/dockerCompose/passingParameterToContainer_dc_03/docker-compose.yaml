@@ -1,0 +1,7 @@
+version: "3"
+services:
+  multiply_2_numbers:
+    image: beneite/docker_learning:multiply2numbers_fix
+    environment:
+      - NUMBER1=10
+      - NUMBER2=25

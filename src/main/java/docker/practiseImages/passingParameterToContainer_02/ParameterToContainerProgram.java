@@ -1,4 +1,4 @@
-package docker.practiseImages.passingParameterToContainer;
+package docker.practiseImages.passingParameterToContainer_02;
 
 public class ParameterToContainerProgram{
 	public static void main(String[] args){
