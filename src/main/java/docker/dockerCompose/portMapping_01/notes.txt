@@ -1,0 +1,3 @@
+Over here we are going to create a nginx server and will perform port mapping, or connecting to nginx server.
+
+8050:80 -> 8050 will be my local port and 80 will be container port (refer the image in the same module for clarity)

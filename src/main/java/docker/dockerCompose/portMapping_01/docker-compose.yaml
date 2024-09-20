@@ -1,0 +1,6 @@
+version: "3"
+services:
+  nginx-server:
+    image: nginx
+    ports:
+      - 8050:80
