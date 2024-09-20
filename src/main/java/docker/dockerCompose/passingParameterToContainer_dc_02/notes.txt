@@ -1,0 +1,4 @@
+In the dockerFIle we have used NUM to be passed as a parameter to the container.
+ParameterToContainerProgram.java is the jav program which will be executed.
+
+refer : docker/practiseImages/passingParameterToContainer_02
