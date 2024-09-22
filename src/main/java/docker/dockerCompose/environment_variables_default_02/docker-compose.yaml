@@ -1,0 +1,8 @@
+# here we are going to have a default value for environment variables
+version: "3"
+services:
+  multipy_2_Number:
+    image: beneite/docker_learning:multiply2numbers_fix
+    environment:
+      - NUMBER1= ${NUM1:-10}
+      - NUMBER2= ${NUM2:-12}
