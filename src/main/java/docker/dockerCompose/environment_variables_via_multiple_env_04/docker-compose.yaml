@@ -1,0 +1,12 @@
+# passing the VERSION from .env file
+# .env -> {VERSION=v1; PORT=30}
+# dev.env -> {VERSION=v2; PORT=40}
+# qa.env -> {VERSION=v3; PORT=50}
+#  use command: docker-compose --env-file qa.env up
+# to invoke a particular env file
+version: "3"
+services:
+  env-from-file:
+    image: vinsdocker/sel-app:${VERSION}
+    ports:
+      - ${PORT}:80
