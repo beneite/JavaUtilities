@@ -1,0 +1,7 @@
+version: "3"
+services:
+  multipy_2_Number:
+    image: beneite/docker_learning:multiply2numbers_fix
+    environment:
+      - NUMBER1= ${NUM1}
+      - NUMBER2= ${NUM2}
