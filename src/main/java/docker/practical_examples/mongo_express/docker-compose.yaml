@@ -1,0 +1,21 @@
+version: "3"
+services:
+  mongo-service:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - ./data:/docker-entrypoint-initdb.d
+  mongo-express-service:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8030:8081
+    depends_on:
+      - mongo-service
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password
+      ME_CONFIG_MONGODB_SERVER: mongo-service
+      ME_CONFIG_BASICAUTH: false
