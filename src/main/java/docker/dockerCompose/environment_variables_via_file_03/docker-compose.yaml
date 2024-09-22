@@ -1,0 +1,10 @@
+# passing the VERSION from .env file
+# vinsdocker/sel-app:${V1}
+# vinsdocker/sel-app:${V2}
+# vinsdocker/sel-app:${V3}
+version: "3"
+services:
+  env-from-file:
+    image: vinsdocker/sel-app:${VERSION}
+    ports:
+      - 8050:80
