@@ -1,0 +1,12 @@
+version: "3"
+services:
+  nginx-container:
+    image: nginx
+  alpine-container:
+     image: alpine
+     depends_on:
+       - nginx-container
+     working_dir: /fileDownload
+     entrypoint: "wget http://nginx-container"
+     volumes:
+       - ./fileSyncFolder:/fileDownload
