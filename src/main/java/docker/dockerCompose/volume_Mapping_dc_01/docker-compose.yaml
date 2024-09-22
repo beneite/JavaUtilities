@@ -1,3 +1,4 @@
+# - over here we are trying to create 2 container (nginx-container & alpine-container) and we will be demonstrating the volume mapping by downloading the content and putting git into out local.
 version: "3"
 services:
   nginx-container:
