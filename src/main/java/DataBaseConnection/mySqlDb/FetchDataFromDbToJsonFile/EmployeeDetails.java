@@ -1,4 +1,4 @@
-package DataBaseConnection.FetchDataFromDbToJsonFile;
+package DataBaseConnection.mySqlDb.FetchDataFromDbToJsonFile;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
