@@ -1,7 +1,7 @@
 /**
  * this class basically defined the json file structure.
  */
-package DataBaseConnection.FetchDataFromDbToJsonFile;
+package DataBaseConnection.mySqlDb.FetchDataFromDbToJsonFile;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

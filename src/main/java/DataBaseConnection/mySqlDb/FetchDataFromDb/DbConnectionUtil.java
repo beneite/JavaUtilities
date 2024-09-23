@@ -1,4 +1,4 @@
-package DataBaseConnection.FetchDataFromDb;
+package DataBaseConnection.mySqlDb.FetchDataFromDb;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

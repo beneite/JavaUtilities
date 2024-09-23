@@ -1,6 +1,6 @@
-package DataBaseConnection.FetchDataFromDbToJsonFile;
+package DataBaseConnection.mySqlDb.FetchDataFromDbToJsonFile;
 
-import DataBaseConnection.FetchDataFromDb.DbConnectionUtil;
+import DataBaseConnection.mySqlDb.FetchDataFromDb.DbConnectionUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
@@ -11,8 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static DataBaseConnection.FetchDataFromDb.DbConnectionUtil.closeDbConnection;
-import static DataBaseConnection.FetchDataFromDb.DbConnectionUtil.executeQuery;
+import static DataBaseConnection.mySqlDb.FetchDataFromDb.DbConnectionUtil.closeDbConnection;
+import static DataBaseConnection.mySqlDb.FetchDataFromDb.DbConnectionUtil.executeQuery;
 
 public class StoreDbDataInJsonFileTest {
 
@@ -45,7 +45,7 @@ public class StoreDbDataInJsonFileTest {
         jsonFileContent.setNoOfRecords(i);      // setting the no of records in data
         ObjectMapper objectMapper = new ObjectMapper();
         // file will be stored in the same root module location
-        objectMapper.writeValue(new File(System.getProperty("user.dir")+"/src/main/java/DataBaseConnection/FetchDataFromDbToJsonFile/dbToJson.json"), jsonFileContent);
+        objectMapper.writeValue(new File(System.getProperty("user.dir")+"/src/main/java/DataBaseConnection/mySqlDb/FetchDataFromDbToJsonFile/dbToJson.json"), jsonFileContent);
     }
 
     @AfterTest

@@ -1,0 +1,14 @@
+version: "3"
+services:
+  postgres-container:
+    image: postgres
+    environment:
+      POSTGRES_USER: ashish
+      POSTGRES_PASSWORD: ashish@123
+      POSTGRES_DB: students_db
+    volumes:
+      - ./init_script:/docker-entrypoint-initdb.d
+  adminer-container:
+    image: adminer
+    ports:
+      - 8080:8080

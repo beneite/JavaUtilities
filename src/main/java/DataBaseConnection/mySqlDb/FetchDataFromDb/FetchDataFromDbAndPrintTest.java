@@ -1,4 +1,4 @@
-package DataBaseConnection.FetchDataFromDb;
+package DataBaseConnection.mySqlDb.FetchDataFromDb;
 
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
@@ -6,8 +6,8 @@ import org.testng.annotations.Test;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static DataBaseConnection.FetchDataFromDb.DbConnectionUtil.closeDbConnection;
-import static DataBaseConnection.FetchDataFromDb.DbConnectionUtil.executeQuery;
+import static DataBaseConnection.mySqlDb.FetchDataFromDb.DbConnectionUtil.closeDbConnection;
+import static DataBaseConnection.mySqlDb.FetchDataFromDb.DbConnectionUtil.executeQuery;
 
 public class FetchDataFromDbAndPrintTest {
 
