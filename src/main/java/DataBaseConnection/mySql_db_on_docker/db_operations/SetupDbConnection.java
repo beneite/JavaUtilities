@@ -52,6 +52,21 @@ public class SetupDbConnection {
         return statement.executeQuery(sqlQuery);
     }
 
+    /**
+     * For INSERT, UPDATE, and DELETE operations, you should use executeUpdate() instead of executeQuery(), as executeQuery() is designed to return a ResultSet,
+     * which makes sense only for queries that retrieve data.
+     * @param sqlQuery sqlQuery
+     * @throws SQLException
+     */
+    public void executeUpdateQuery(String sqlQuery) throws SQLException {
+        if (connection == null || connection.isClosed()) {
+            throw new SQLException("Connection is not established.");
+        }
+        Statement statement = getConnection().createStatement();
+        statement.executeUpdate(sqlQuery);
+    }
+
+
     @AfterSuite(alwaysRun = true)
     // Close the connection and statement resources
     public void closeResources() {
