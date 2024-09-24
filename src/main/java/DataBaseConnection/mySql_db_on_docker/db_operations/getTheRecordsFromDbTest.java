@@ -54,8 +54,16 @@ public class getTheRecordsFromDbTest {
         setupDbConnection = new SetupDbConnection(dbUsername, dbPassword, dbPort, dbName);
 
         connection = setupDbConnection.setUpConnection(dbUsername, dbPassword, dbPort, dbName);
+        String query = QueryEnums.SqlQueries.SELECT_ALL_FROM_TABLE_STUDENT_RECORD.getQuery();
+        ResultSet resultSet = setupDbConnection.executeQuery(query);
+        System.out.println("Before update:"+setupDbConnection.printResultSetData(resultSet));
+
+        String updateQuery = "UPDATE student_record SET name = 'updatedName' where id = '2';";
+        setupDbConnection.executeUpdateQuery(updateQuery);
 
 
+        resultSet = setupDbConnection.executeQuery(query);
+        System.out.println("After update:"+setupDbConnection.printResultSetData(resultSet));
     }
 
 
