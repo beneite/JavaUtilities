@@ -66,5 +66,21 @@ public class getTheRecordsFromDbTest {
         System.out.println("After update:"+setupDbConnection.printResultSetData(resultSet));
     }
 
+    @Test(description = "delete a student record", dataProvider = "studentDbData")
+    public void deleteRecordInDbTest(String dbUsername, String dbPassword, String dbPort, String dbName) throws SQLException {
+        setupDbConnection = new SetupDbConnection(dbUsername, dbPassword, dbPort, dbName);
+
+        connection = setupDbConnection.setUpConnection(dbUsername, dbPassword, dbPort, dbName);
+        String query = QueryEnums.SqlQueries.SELECT_ALL_FROM_TABLE_STUDENT_RECORD.getQuery();
+        ResultSet resultSet = setupDbConnection.executeQuery(query);
+        System.out.println("Before delete:"+setupDbConnection.printResultSetData(resultSet));
+
+        String updateQuery = "DELETE FROM student_record WHERE id = '4';";
+        setupDbConnection.executeUpdateQuery(updateQuery);
+
+
+        resultSet = setupDbConnection.executeQuery(query);
+        System.out.println("After delete:"+setupDbConnection.printResultSetData(resultSet));
+    }
 
 }
