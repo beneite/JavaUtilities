@@ -14,9 +14,16 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    <selenium.java.version>4.23.0</selenium.java.version>
   </properties>
 
   <dependencies>
+
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>${selenium.java.version}</version>
+    </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest -->
     <dependency>
