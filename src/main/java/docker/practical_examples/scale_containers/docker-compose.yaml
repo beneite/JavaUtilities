@@ -1,0 +1,28 @@
+version: "3"
+services:
+  selenium-grid-service:
+    image: seleniarm/hub:4.20
+    ports:
+      - 4444:4444
+  chrome-service:
+    image: seleniarm/node-chromium:4.20
+    shm_size: '2g'
+    deploy:
+      replicas: 4
+    depends_on:
+      - selenium-grid-service
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-grid-service
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+  firefox-service:
+    image: seleniarm/node-firefox:4.20
+    shm_size: '2g'
+    deploy:
+      replicas: 2
+    depends_on:
+      - selenium-grid-service
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-grid-service
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
