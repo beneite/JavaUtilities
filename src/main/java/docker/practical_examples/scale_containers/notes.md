@@ -1,5 +1,6 @@
 # Selenium Grid Setup with Chrome and Firefox Nodes (ARM64)
 
+---
 This `docker-compose.yml` file sets up a Selenium Grid using Seleniarm images for ARM64 architecture (Mac M1/M2, etc.). It includes services for the Selenium Grid Hub, Chrome nodes, and Firefox nodes. This setup uses Docker Compose version 3.
 
 ## Services
@@ -16,11 +17,12 @@ This `docker-compose.yml` file sets up a Selenium Grid using Seleniarm images fo
 - **Replicas**:
     - 4 replicas of the Chrome nodes will be deployed for parallel test execution.
     ![6 containers.png](6%20containers.png)
+
     - Yes, in Docker Compose, each replica is a new container. When you specify replicas for a service, Docker creates multiple instances (containers) of that service. Each replica is an independent container that runs the same image and configuration.
     ![seleniumGrid_WebPage.png](seleniumGrid_WebPage.png)
-In your case:
-- For the `chrome-service` with `replicas: 4`, Docker will create 4 separate containers, each running the `seleniarm/node-chromium:4.20` image.
-- For the `firefox-service` with `replicas: 2`, Docker will create 2 separate containers, each running the `seleniarm/node-firefox:4.20` image.
+- **In your case**:
+> - For the `chrome-service` with `replicas: 4`, Docker will create 4 separate containers, each running the `seleniarm/node-chromium:4.20` image.
+> - For the `firefox-service` with `replicas: 2`, Docker will create 2 separate containers, each running the `seleniarm/node-firefox:4.20` image.
 
 These replicas will be managed by Docker, allowing for parallel browser sessions and making it easier to run tests concurrently across multiple containers.
 - **Depends On**:
