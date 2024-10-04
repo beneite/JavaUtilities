@@ -1,5 +1,7 @@
 ## `docker-compose.yml` Explanation:
 
+![selenium_grid_arch.png](selenium_grid_arch.png)
+
 This Docker Compose file is setting up a Selenium Grid with ARM64-compatible images on an ARM-based machine (such as Apple Silicon). The grid consists of three services:
 
 1. **Selenium Hub (selenium-grid-service):**
