@@ -1,0 +1,17 @@
+version: "3"
+services:
+  ftpServer-service:
+    image: fauria/vsftpd
+    environment:
+      - FTP_USER=admin
+      - FTP_PASS=ashish@123
+      - PASV_ADDRESS=127.0.0.1   # Change this to the public IP of your Docker host if connecting from outside.
+      - PASV_MIN_PORT=21100      # Passive mode minimum port
+      - PASV_MAX_PORT=21110      # Passive mode maximum port
+    ports:
+      - "8020:20"                 # Port for active FTP
+      - "21:21"                   # FTP control port
+      - "21100-21110:21100-21110" # Passive mode data ports
+    volumes:
+      - ./volumeMapping:/home/vsftpd
+
