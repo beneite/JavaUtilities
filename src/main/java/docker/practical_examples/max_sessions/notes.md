@@ -38,7 +38,7 @@ services:
       - SE_EVENT_BUS_HOST=selenium-grid-service
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-      - SE_NODE_MAX_SESSIONS=5  # Set the maximum number of concurrent Firefox sessions
+      - SE_NODE_MAX_SESSIONS=3  # Set the maximum number of concurrent Firefox sessions
       - SE_NODE_OVERRIDE_MAX_SESSIONS=true  # Allow overriding of default max sessions behavior
 ```
 
