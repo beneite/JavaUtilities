@@ -1,0 +1,10 @@
+version: "3"
+services:
+  jenkins-service:
+    image: jenkins/jenkins:lts
+    user: root
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - ./volume_mapping/master:/var/jenkins_home

@@ -1,0 +1,10 @@
+[
+  {
+    "dbName":"dbCOnnection",
+    "dbType":"mysql",
+    "dbUsername":"root",
+    "dbPassword":"Ashish@123",
+    "hostname":"localhost",
+    "dbPort":"3306"
+  }
+]
