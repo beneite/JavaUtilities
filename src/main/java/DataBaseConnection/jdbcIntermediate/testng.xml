@@ -3,6 +3,7 @@
     <test name="Test Setup">
         <classes>
             <class name="DataBaseConnection.jdbcIntermediate.test.TestClassForEmployee" />
+            <class name="DataBaseConnection.jdbcIntermediate.test.TestClassForStudentDataBase" />
         </classes>
     </test>
 </suite>

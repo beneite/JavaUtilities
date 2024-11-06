@@ -5,6 +5,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class BaseTest {
 
@@ -17,7 +18,7 @@ public class BaseTest {
     }
 
     @AfterSuite
-    public void afterSuiteMethod(){
+    public void afterSuiteMethod() throws SQLException {
         System.out.println("**** Starting AfterSuite");
         setupDbConnection.closeResources();
     }
