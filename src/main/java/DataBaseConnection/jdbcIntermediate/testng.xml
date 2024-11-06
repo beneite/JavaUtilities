@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="My Test Suite">
+    <test name="Test Setup">
+        <classes>
+            <class name="DataBaseConnection.jdbcIntermediate.test.TestClassForEmployee" />
+        </classes>
+    </test>
+</suite>

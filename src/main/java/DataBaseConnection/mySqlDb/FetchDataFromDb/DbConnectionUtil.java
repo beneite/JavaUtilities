@@ -22,6 +22,7 @@ public class DbConnectionUtil {
      */
     public DbConnectionUtil(String hostname, String port, String dbName, String dbUserName, String dbPassword){
         dbUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName + "?user=" + dbUserName + "&password=" + dbPassword;
+        System.out.println("dbUrl:"+dbUrl);
         if(dbConnection==null)
             dbConnection = establshSqlDbConnection();
     }
