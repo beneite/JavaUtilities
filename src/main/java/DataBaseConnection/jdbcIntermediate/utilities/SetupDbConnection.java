@@ -4,6 +4,8 @@ package DataBaseConnection.jdbcIntermediate.utilities;
 import DataBaseConnection.jdbcIntermediate.entity.DbConnectionEntity;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
@@ -25,7 +27,7 @@ public class SetupDbConnection {
     public String dbname;
 //    public Connection connection;
     public static final String DB_CONNECTION_FILE = System.getProperty("user.dir") + "/src/main/java/DataBaseConnection/jdbcIntermediate/resources/dbConnections.json";
-    private static Map<String, Connection> dataSourceMap = new ConcurrentHashMap<>();
+    private static Map<String, HikariDataSource> dataSourceMap = new ConcurrentHashMap<>();
 
 //    public SetupDbConnection(String dbUsername, String dbPassword, String dbPort, String dbname) {
 //        this.dbUsername = dbUsername;
@@ -36,6 +38,12 @@ public class SetupDbConnection {
 
     public String createConnectionUrl(String dbName, String dbType, String hostname, String dbPort, String dbUsername, String dbPassword) {
         url = "jdbc:" + dbType + "://" + hostname + ":" + dbPort + "/" + dbName + "?user=" + dbUsername + "&password=" + dbPassword;
+        System.out.println("URL:" + url);
+        return url;
+    }
+
+    public String createConnectionUrl(String dbName, String dbType, String hostname, String dbPort) {
+        url = "jdbc:" + dbType + "://" + hostname + ":" + dbPort + "/" + dbName;
         System.out.println("URL:" + url);
         return url;
     }
@@ -57,11 +65,13 @@ public class SetupDbConnection {
         ObjectMapper mapper = new ObjectMapper();
         List<DbConnectionEntity> DbConnectionEntityList = mapper.readValue(new File(DB_CONNECTION_FILE), new TypeReference<>() {
         });
-
         for (DbConnectionEntity dbConnectionEntity : DbConnectionEntityList) {
-            System.out.println("dbConnectionEntity.getDbName():"+dbConnectionEntity.getDbName());
-            Connection singleConnection = setUpConnection(dbConnectionEntity.getDbName(), dbConnectionEntity.getDbType(), dbConnectionEntity.getHostname(), dbConnectionEntity.getDbPort(), dbConnectionEntity.getDbUsername(), dbConnectionEntity.getDbPassword());
-            dataSourceMap.put(dbConnectionEntity.getDbName(), singleConnection);
+            HikariConfig config = new HikariConfig();
+            config.setJdbcUrl(createConnectionUrl(dbConnectionEntity.getDbName(), dbConnectionEntity.getDbType(), dbConnectionEntity.getHostname(), dbConnectionEntity.getDbPort()));
+            config.setUsername(dbConnectionEntity.getDbUsername());
+            config.setPassword(dbConnectionEntity.getDbPassword());
+
+            dataSourceMap.put(dbConnectionEntity.getDbName(), new HikariDataSource(config));
         }
 
     }
@@ -69,20 +79,21 @@ public class SetupDbConnection {
 
     // Close the connection and statement resources
     public void closeResources() {
-        for(String key : dataSourceMap.keySet()){
-            Connection connection = dataSourceMap.get(key);
-            try {
-                if (connection != null && !connection.isClosed()) {
-                    connection.close();
+        dataSourceMap.values().forEach(
+                dataSource -> {
+                    try {
+                        if ( dataSource.getConnection()!= null && !dataSource.getConnection().isClosed()) {
+                            dataSource.close();
+                        }
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+        );
     }
 
-    public static Connection getConnectionFromDataSource(String dbname) {
-        return dataSourceMap.get(dbname);
+    public static Connection getConnectionFromDataSource(String dbname) throws SQLException {
+        return dataSourceMap.get(dbname).getConnection();
     }
 
 }
