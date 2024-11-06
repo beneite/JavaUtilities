@@ -39,6 +39,14 @@ public class DbExecutionUtilities {
         return preparedStatement.executeQuery();
     }
 
+    public static int executePreparedStatementUpdateQuery(Connection connection, PreparedStatement preparedStatement) throws SQLException {
+        if (connection == null || connection.isClosed()) {
+            throw new SQLException("Connection is not established.");
+        }
+        System.out.println("SQL query to be executed:"+preparedStatement.toString());
+        return preparedStatement.executeUpdate();
+    }
+
     public static String printResultSetData(ResultSet resultSet) throws SQLException {
         StringBuilder stringBuilder = new StringBuilder();
         ResultSetMetaData metaData = resultSet.getMetaData();
