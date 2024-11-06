@@ -1,10 +1,9 @@
 package DataBaseConnection.jdbcIntermediate.utilities;
 
-public class DbQueryEnum {
+public class DbQuerydbCOnnectionEnum {
 
     public enum SqlQueries {
-        SELECT_ALL_RECORD_FROM_TABLE_EMPLOYEE("SELECT * FROM employeeTable;"),
-        SELECT_ALL_RECORD_FROM_TABLE_USERS("SELECT * FROM users;");
+        SELECT_ALL_RECORD_FROM_TABLE_EMPLOYEE("SELECT * FROM employeeTable;");
 
         private final String query;
 
