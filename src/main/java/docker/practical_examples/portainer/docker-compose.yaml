@@ -1,0 +1,17 @@
+version: "3.0"
+services:
+  portainer-service:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: always
+    ports:
+      - "9000:9000"  # Web UI
+      - "8000:8000"  # Edge agent (optional)
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock  # Access Docker API
+      - portainer_data:/data  # Persist Portainer data
+
+volumes:
+  portainer_data:
+
+# password is Beneite@0987654321
