@@ -1,0 +1,22 @@
+services:
+  mySqlService:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ashish@123
+      MYSQL_USER: ashish
+      MYSQL_PASSWORD: ashish@123
+      MYSQL_DATABASE: students_db
+    ports:
+      - 3307:3306
+    volumes:
+      - ./init_script:/docker-entrypoint-initdb.d   # For initialization scripts
+      - ./mysql_data:/var/lib/mysql                 # For persistent data storage
+    profiles:
+      - entireDbEcosystem
+      - onlyDbBackend
+  adminer-service:
+    image: adminer
+    ports:
+      - 8070:8080
+    profiles:
+      - entireDbEcosystem
