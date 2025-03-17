@@ -56,3 +56,74 @@ This will start **Zookeeper** and **Kafka** in detached mode (`-d` runs them in 
 docker-compose --profile kafka down
 ```
 This stops and removes the containers.
+
+# **How to Start Kafka Server Using Docker Compose?**
+
+Since your `docker-compose.yml` file defines **Zookeeper** and **Kafka**, you can start the services using the **Kafka profile**.
+
+#### **Step 1: Start Kafka and Zookeeper**
+Run the following command to start both services in **detached mode** (`-d` runs them in the background):
+```sh
+docker-compose --profile kafka up -d
+```
+🔹 This will:
+- Start **Zookeeper** (`zookeeper-service`).
+- Start **Kafka** (`kafka-service`) after **Zookeeper** is ready.
+
+---
+
+#### **Step 2: Verify That Kafka is Running**
+After starting the services, you can check if Kafka is running by listing the running containers:
+```sh
+docker ps
+```
+You should see **both** `zookeeper-container` and `kafka-container` running.
+
+---
+
+#### **Step 3: Connect to Kafka**
+To check if Kafka is working, open a shell inside the Kafka container:
+```sh
+docker exec -it kafka-container /bin/sh
+```
+Then, list the existing Kafka topics:
+```sh
+kafka-topics.sh --list --bootstrap-server localhost:9092
+```
+If everything is set up correctly, this should show the available Kafka topics.
+
+---
+
+#### **Step 4: Stop Kafka and Zookeeper**
+To stop the Kafka server and Zookeeper, run:
+```sh
+docker-compose --profile kafka down
+```
+This will gracefully stop and remove the containers.
+
+---
+
+### **Troubleshooting**
+1. **Kafka Fails to Start?**
+    - Ensure Zookeeper is running before Kafka starts:
+      ```sh
+      docker logs zookeeper-container
+      ```
+    - Check Kafka logs:
+      ```sh
+      docker logs kafka-container
+      ```
+
+2. **Kafka Topics Not Listing?**
+    - Try creating a new topic:
+      ```sh
+      kafka-topics.sh --create --topic test-topic --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+      ```
+    - Then list topics again:
+      ```sh
+      kafka-topics.sh --list --bootstrap-server localhost:9092
+      ```
+
+---
+
+This should get your Kafka server up and running. 🚀 Let me know if you need further assistance!

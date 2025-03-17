@@ -16,10 +16,24 @@ services:
     environment:
       KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper-service:2181
       KAFKA_CFG_LISTENERS: PLAINTEXT://:9092
-      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://kafka-service:9092
       KAFKA_CFG_BROKER_ID: 1
       ALLOW_PLAINTEXT_LISTENER: "yes"
     depends_on:
       - zookeeper-service
+    profiles:
+      - kafka
+
+  kafka-ui-service:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui-container
+    ports:
+      - "8080:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local-cluster
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-service:9092
+      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper-service:2181
+    depends_on:
+      - kafka-service
     profiles:
       - kafka
