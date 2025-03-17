@@ -1,0 +1,25 @@
+
+services:
+  zookeeper-service:
+    image: zookeeper:3.9.3-jre-17
+    container_name: zookeeper-container
+    ports:
+      - "2181:2181"
+    profiles:
+      - kafka
+
+  kafka-service:
+    image: bitnami/kafka:latest
+    container_name: kafka-container
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper-service:2181
+      KAFKA_CFG_LISTENERS: PLAINTEXT://:9092
+      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_CFG_BROKER_ID: 1
+      ALLOW_PLAINTEXT_LISTENER: "yes"
+    depends_on:
+      - zookeeper-service
+    profiles:
+      - kafka
