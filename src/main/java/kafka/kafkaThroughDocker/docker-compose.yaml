@@ -5,8 +5,6 @@ services:
     container_name: zookeeper-container
     ports:
       - "2181:2181"
-    profiles:
-      - kafka
 
   kafka-service:
     image: bitnami/kafka:latest
@@ -21,8 +19,6 @@ services:
       ALLOW_PLAINTEXT_LISTENER: "yes"
     depends_on:
       - zookeeper-service
-    profiles:
-      - kafka
 
   kafka-ui-service:
     image: provectuslabs/kafka-ui:latest
@@ -34,6 +30,4 @@ services:
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-service:9092
       KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper-service:2181
     depends_on:
-      - kafka-service
-    profiles:
-      - kafka
+     - kafka-service
