@@ -1,129 +1,116 @@
-This `docker-compose.yml` file defines two services, **Zookeeper** and **Kafka**, that are essential for running an Apache Kafka setup using Docker.
+# Kafka and Kafdrop Setup using Docker Compose
+
+## Overview
+This `docker-compose.yml` file sets up a **Kafka** broker along with **Zookeeper** and **Kafdrop UI** using Docker containers. The setup allows Kafka to be accessed both **inside Docker** (for Kafdrop) and **from the host machine** (for external applications like Java producers/consumers).
 
 ---
 
-## **Service Descriptions**
+## Services in `docker-compose.yml`
 
-### **1. Zookeeper Service (`zookeeper-service`)**
-- **Image:** `zookeeper:3.9.3-jre-17`
-    - Uses the official **Zookeeper** Docker image with **Java 17**.
-- **Container Name:** `zookeeper-container`
-- **Ports:**
-    - Maps **Zookeeper's** default port `2181` from the container to the host (`2181:2181`).
-- **Profiles:**
-    - Belongs to the **"kafka"** profile, meaning it will only start when the `kafka` profile is used.
+### 1️⃣ **Zookeeper (`zookeeper-service`)**
+Zookeeper is required for Kafka to manage its brokers and distributed state.
 
-🔹 **Zookeeper** is a critical dependency for Kafka, managing broker coordination, leader election, and maintaining metadata.
-
----
-
-### **2. Kafka Service (`kafka-service`)**
-- **Image:** `bitnami/kafka:latest`
-    - Uses the **Bitnami Kafka** image, which simplifies configuration.
-- **Container Name:** `kafka-container`
-- **Ports:**
-    - Exposes Kafka’s default broker port (`9092:9092`).
-- **Environment Variables:**
-    - `KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper-service:2181`
-        - Configures Kafka to connect to the **Zookeeper service** running at `zookeeper-service:2181`.
-    - `KAFKA_CFG_LISTENERS: PLAINTEXT://:9092`
-        - Defines a **PLAINTEXT** listener on port `9092`.
-    - `KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092`
-        - Kafka will advertise itself as `localhost:9092`, ensuring clients can connect.
-    - `KAFKA_CFG_BROKER_ID: 1`
-        - Sets the **Kafka Broker ID** (should be unique in a multi-node cluster).
-    - `ALLOW_PLAINTEXT_LISTENER: "yes"`
-        - Allows Kafka to accept plaintext connections (useful for local development).
-- **Depends On:**
-    - `zookeeper-service`: Ensures that **Zookeeper** starts before Kafka.
-- **Profiles:**
-    - Belongs to the **"kafka"** profile.
-
-🔹 **Kafka** relies on **Zookeeper** to manage its brokers and distribute messages reliably.
-
----
-
-## **How to Use This Setup?**
-### **Starting Kafka & Zookeeper**
-Run the following command to start both services using the `kafka` profile:
-```sh
-docker-compose --profile kafka up -d
+```yaml
+  zookeeper-service:
+    image: zookeeper:3.9.3-jre-17
+    container_name: zookeeper-container
+    ports:
+      - "2181:2181"
 ```
-This will start **Zookeeper** and **Kafka** in detached mode (`-d` runs them in the background).
-
-### **Stopping Kafka & Zookeeper**
-```sh
-docker-compose --profile kafka down
-```
-This stops and removes the containers.
-
-# **How to Start Kafka Server Using Docker Compose?**
-
-Since your `docker-compose.yml` file defines **Zookeeper** and **Kafka**, you can start the services using the **Kafka profile**.
-
-#### **Step 1: Start Kafka and Zookeeper**
-Run the following command to start both services in **detached mode** (`-d` runs them in the background):
-```sh
-docker-compose --profile kafka up -d
-```
-🔹 This will:
-- Start **Zookeeper** (`zookeeper-service`).
-- Start **Kafka** (`kafka-service`) after **Zookeeper** is ready.
+✅ **Key Points:**
+- Uses the official `zookeeper` image.
+- Listens on **port 2181** (required by Kafka).
 
 ---
 
-#### **Step 2: Verify That Kafka is Running**
-After starting the services, you can check if Kafka is running by listing the running containers:
+### 2️⃣ **Kafka Broker (`kafka-service`)**
+Kafka is the message broker responsible for handling the publish-subscribe messaging system.
+
+```yaml
+  kafka-service:
+    image: bitnami/kafka:latest
+    container_name: kafka-container
+    ports:
+      - "9092:9092"
+      - "29092:29092"  # Expose Kafka for external access
+    environment:
+      KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper-service:2181
+      KAFKA_CFG_LISTENERS: PLAINTEXT://0.0.0.0:9092,PLAINTEXT_HOST://0.0.0.0:29092
+      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://kafka-service:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_CFG_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      ALLOW_PLAINTEXT_LISTENER: "yes"
+    depends_on:
+      - zookeeper-service
+```
+✅ **Key Points:**
+- Uses the `bitnami/kafka` image.
+- **Exposes two ports:**
+    - `9092:9092` → For **internal communication** (used by Kafdrop & other Docker services).
+    - `29092:29092` → For **external communication** (used by Java applications running on the host machine).
+- **Listener Configuration:**
+    - `PLAINTEXT://kafka-service:9092` → Used for **internal services like Kafdrop**.
+    - `PLAINTEXT_HOST://localhost:29092` → Used for **external applications (Java producer/consumer)**.
+- **Security Mapping:** Ensures that both listeners use the `PLAINTEXT` security protocol.
+
+---
+
+### 3️⃣ **Kafdrop UI (`kafka-ui-service`)**
+Kafdrop is a web-based UI for managing and monitoring Kafka topics, partitions, and messages.
+
+```yaml
+  kafka-ui-service:
+    image: obsidiandynamics/kafdrop:latest
+    container_name: kafdrop-container
+    ports:
+      - "9000:9000"
+    environment:
+      KAFKA_BROKERCONNECT: kafka-service:9092
+    depends_on:
+      - kafka-service
+```
+✅ **Key Points:**
+- Uses the `obsidiandynamics/kafdrop` image.
+- Accessible via **http://localhost:9000**.
+- Connects to Kafka **inside Docker** using `kafka-service:9092`.
+
+---
+
+## Running the Kafka Cluster
+
+### **Start the Containers**
+```sh
+docker-compose up -d
+```
+✅ This will start **Zookeeper, Kafka, and Kafdrop** in detached mode.
+
+### **Verify Kafka is Running**
 ```sh
 docker ps
 ```
-You should see **both** `zookeeper-container` and `kafka-container` running.
+✅ Should show `zookeeper-container`, `kafka-container`, and `kafdrop-container` running.
 
----
-
-#### **Step 3: Connect to Kafka**
-To check if Kafka is working, open a shell inside the Kafka container:
+### **Check Kafka Topics (From Host Machine)**
 ```sh
-docker exec -it kafka-container /bin/sh
+kafka-topics.sh --bootstrap-server localhost:29092 --list
 ```
-Then, list the existing Kafka topics:
+✅ This should return a list of topics in Kafka.
+
+### **Access Kafdrop UI**
+Open **[http://localhost:9000](http://localhost:9000)** in your browser to manage Kafka topics.
+
+### **Stop and Remove Containers**
 ```sh
-kafka-topics.sh --list --bootstrap-server localhost:9092
+docker-compose down -v
 ```
-If everything is set up correctly, this should show the available Kafka topics.
+✅ Stops all services and removes volumes.
 
 ---
 
-#### **Step 4: Stop Kafka and Zookeeper**
-To stop the Kafka server and Zookeeper, run:
-```sh
-docker-compose --profile kafka down
-```
-This will gracefully stop and remove the containers.
+## **Conclusion**
+This setup allows:
+✅ **Internal Kafka communication** via `kafka-service:9092` (for Docker services like Kafdrop).
+✅ **External access from host** via `localhost:29092` (for Java applications).
+✅ **Web-based Kafka management** using Kafdrop UI at `http://localhost:9000`.
 
----
-
-### **Troubleshooting**
-1. **Kafka Fails to Start?**
-    - Ensure Zookeeper is running before Kafka starts:
-      ```sh
-      docker logs zookeeper-container
-      ```
-    - Check Kafka logs:
-      ```sh
-      docker logs kafka-container
-      ```
-
-2. **Kafka Topics Not Listing?**
-    - Try creating a new topic:
-      ```sh
-      kafka-topics.sh --create --topic test-topic --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
-      ```
-    - Then list topics again:
-      ```sh
-      kafka-topics.sh --list --bootstrap-server localhost:9092
-      ```
-
----
-
-This should get your Kafka server up and running. 🚀 Let me know if you need further assistance!
+This is a simple yet powerful way to run Kafka locally using Docker! 🚀

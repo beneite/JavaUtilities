@@ -12,15 +12,12 @@ public class ProducerApiMethods {
     @Test
     public void sendDataThroughProducer() {
         Properties properties = new Properties();
-        properties.setProperty("bootstrap.servers", "localhost:9092");
+        properties.setProperty("bootstrap.servers", "localhost:29092");
         properties.setProperty("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        properties.setProperty("value.serializer", "org.apache.kafka.common.serialization.IntegerSerializer");
-        properties.setProperty("acks", "all");  // Ensure Kafka acknowledges messages
-        properties.setProperty("retries", "3"); // Retry sending on failure
-        properties.setProperty("request.timeout.ms", "30000"); // Set timeout to 30s
+        properties.setProperty("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
-        KafkaProducer<String, Integer> producer = new KafkaProducer<>(properties);
-        ProducerRecord<String, Integer> record = new ProducerRecord<>("my-topic", "key-1", 10);
+        KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
+        ProducerRecord<String, String> record = new ProducerRecord<>("my-topic", "key-2", "Key 2 bhej diya");
 
         try {
             System.out.println("🟢 Sending record...");
