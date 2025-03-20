@@ -10,9 +10,15 @@ import java.util.Properties;
 public class SyncProducer {
 
     /**
+     * ********************************************************************************************************************
      * A Sync Producer (Synchronous Kafka Producer) is a Kafka producer that waits for an acknowledgment from the Kafka broker before proceeding.
      * In the provided code, the .get() method is used on the send(record) call,
      * making it a blocking call that waits until the message is successfully sent and metadata is returned.
+     * ********************************************************************************************************************
+     * Pre-Requisite:
+     * 1. Run the docker container 'kafka/kafkaThroughDocker/docker-compose.yaml'
+     * 2. Run 'docker exec -it kafka-container /bin/sh' to enter inside kafka-container
+     * 3. run command 'kafka-topics.sh --create --topic my-topic --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1' to create topic.
      */
     @Test
     public void synchronousSendDataThroughProducer(){
