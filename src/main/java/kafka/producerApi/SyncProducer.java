@@ -3,7 +3,7 @@ package kafka.producerApi;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import java.util.Properties;
 
