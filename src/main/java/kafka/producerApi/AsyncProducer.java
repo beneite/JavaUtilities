@@ -9,8 +9,14 @@ import java.util.Properties;
 public class AsyncProducer {
 
     /**
+     * ********************************************************************************************************************
      * An Async Producer (Asynchronous Kafka Producer) is a Kafka producer that sends messages without blocking the execution of the program.
      * It uses a callback mechanism to handle the acknowledgment when the message is successfully sent or encounters an error.
+     * ********************************************************************************************************************
+     * Pre-Requisite:
+     * 1. Run the docker container 'kafka/kafkaThroughDocker/docker-compose.yaml'
+     * 2. Run 'docker exec -it kafka-container /bin/sh' to enter inside kafka-container
+     * 3. run command 'kafka-topics.sh --create --topic my-topic --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1' to create topic.
      */
     @Test
     public void sendDataThroughProducer() {
