@@ -9,18 +9,23 @@ import java.util.Properties;
 
 public class SyncProducer {
 
+    /**
+     * A Sync Producer (Synchronous Kafka Producer) is a Kafka producer that waits for an acknowledgment from the Kafka broker before proceeding.
+     * In the provided code, the .get() method is used on the send(record) call,
+     * making it a blocking call that waits until the message is successfully sent and metadata is returned.
+     */
     @Test
     public void synchronousSendDataThroughProducer(){
         Properties properties = new Properties();
-        properties.setProperty("bootstrap.servers","localhost:9092");
+        properties.setProperty("bootstrap.servers","localhost:29092");
         properties.setProperty("key.serializer","org.apache.kafka.common.serialization.StringSerializer");
-        properties.setProperty("value.serializer","org.apache.kafka.common.serialization.IntegerSerializer");
+        properties.setProperty("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
-        KafkaProducer<String, Integer> producer = new KafkaProducer<>(properties);
-        ProducerRecord<String, Integer> record = new ProducerRecord<>("my-topic","key-1", 100011);
+        KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
+        ProducerRecord<String, String> record = new ProducerRecord<>("my-topic", "key-1", "Message for Ashish Mishra via Sync");
 
         try{
-            System.out.println("🟢 Sending record...");
+            System.out.println("🟢 Sending record as Sync...");
             RecordMetadata recordMetadata = producer.send(record).get(); // Blocking call
 
             System.out.println("✅ Producer generated record: " + record);

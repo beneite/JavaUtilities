@@ -1,6 +1,7 @@
 /**
  * args value will be provided via container environment values.
  */
+package docker.dockerCompose.creatingDockerImageViaCompose;
 
 public class MultiplyNumbersOnContainers {
 
