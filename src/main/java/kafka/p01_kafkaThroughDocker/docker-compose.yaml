@@ -1,0 +1,32 @@
+services:
+  zookeeper-service:
+    image: zookeeper:3.9.3-jre-17
+    container_name: zookeeper-container
+    ports:
+      - "2181:2181"
+
+  kafka-service:
+    image: bitnami/kafka:latest
+    container_name: kafka-container
+    ports:
+      - "9092:9092"
+      - "29092:29092"  # Expose Kafka for external access
+    environment:
+      KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper-service:2181
+      KAFKA_CFG_LISTENERS: PLAINTEXT://0.0.0.0:9092,PLAINTEXT_HOST://0.0.0.0:29092
+      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://kafka-service:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_CFG_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      ALLOW_PLAINTEXT_LISTENER: "yes"
+    depends_on:
+      - zookeeper-service
+
+  kafka-ui-service:
+    image: obsidiandynamics/kafdrop:latest
+    container_name: kafdrop-container
+    ports:
+      - "9000:9000"
+    environment:
+      KAFKA_BROKERCONNECT: kafka-service:9092
+    depends_on:
+      - kafka-service
