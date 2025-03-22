@@ -4,6 +4,7 @@ import kafka.constantsClass.Constants;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
+import org.apache.kafka.common.serialization.StringSerializer;
 import org.testng.annotations.Test;
 
 import java.util.Properties;
@@ -25,8 +26,8 @@ public class producerUsingCustomSerializer {
     public void verifyProducerUsingCustomSerializer(){
         Properties properties = new Properties();
         properties.setProperty(Constants.BOOTSTRAP_SERVER, Constants.LOCALHOST_29092);
-        properties.setProperty(Constants.KEY_SERIALIZER,"org.apache.kafka.common.serialization.StringSerializer");
-        properties.setProperty(Constants.VALUE_SERIALIZER, "kafka.p05_customSerializer.OrderSerializer"); // using custom serializer
+        properties.setProperty(Constants.KEY_SERIALIZER, StringSerializer.class.getName());
+        properties.setProperty(Constants.VALUE_SERIALIZER, OrderSerializer.class.getName()); // using custom serializer
 
         Order order = new Order("Ashish Mishra","Nestle Maggi", 20);
 
