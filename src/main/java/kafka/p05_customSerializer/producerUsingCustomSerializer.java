@@ -1,5 +1,6 @@
-package kafka.producerApi;
+package kafka.p05_customSerializer;
 
+import kafka.constantsClass.Constants;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
@@ -7,7 +8,7 @@ import org.testng.annotations.Test;
 
 import java.util.Properties;
 
-public class SyncProducer {
+public class producerUsingCustomSerializer {
 
     /**
      * ********************************************************************************************************************
@@ -21,14 +22,16 @@ public class SyncProducer {
      * 3. run command 'kafka-topics.sh --create --topic my-topic --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1' to create topic.
      */
     @Test
-    public void synchronousSendDataThroughProducer(){
+    public void verifyProducerUsingCustomSerializer(){
         Properties properties = new Properties();
-        properties.setProperty("bootstrap.servers","localhost:29092");
-        properties.setProperty("key.serializer","org.apache.kafka.common.serialization.StringSerializer");
-        properties.setProperty("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        properties.setProperty(Constants.BOOTSTRAP_SERVER, Constants.LOCALHOST_29092);
+        properties.setProperty(Constants.KEY_SERIALIZER,"org.apache.kafka.common.serialization.StringSerializer");
+        properties.setProperty(Constants.VALUE_SERIALIZER, "kafka.p05_customSerializer.OrderSerializer"); // using custom serializer
 
-        KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
-        ProducerRecord<String, String> record = new ProducerRecord<>("my-topic", "key-1", "Message for Ashish Mishra via Sync");
+        Order order = new Order("Ashish Mishra","Nestle Maggi", 20);
+
+        KafkaProducer<String, Order> producer = new KafkaProducer<>(properties);
+        ProducerRecord<String, Order> record = new ProducerRecord<>("my-topic", "key-1", order);
 
         try{
             System.out.println("🟢 Sending record as Sync...");
