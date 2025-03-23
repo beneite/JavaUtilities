@@ -1,6 +1,7 @@
 package kafka.p04_singleProducerConsumer;
 
 import kafka.constantsClass.Constants;
+import kafka.utilities.CommonUtils;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -36,7 +37,7 @@ public class ProducerAndConsumer {
         producerProperties.setProperty(Constants.VALUE_SERIALIZER, Constants.STRING_SERIALIZER);
 
         try (KafkaProducer<String, String> producer = new KafkaProducer<>(producerProperties)) {
-            ProducerRecord<String, String> record = new ProducerRecord<>(TOPIC_NAME_MY_TOPIC, "key-2", "Message for Ashish Mishra via sync");
+            ProducerRecord<String, String> record = new ProducerRecord<>(TOPIC_NAME_MY_TOPIC, CommonUtils.generateUniqueKey(), "Message for Ashish Mishra via sync");
             System.out.println("🟢 Sending record as Sync...");
             RecordMetadata recordMetadata = producer.send(record).get();
 

@@ -1,5 +1,6 @@
 package kafka.p02_producerApi;
 
+import kafka.utilities.CommonUtils;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.testng.annotations.Test;
@@ -26,7 +27,7 @@ public class AsyncProducer {
         properties.setProperty("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
         KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
-        ProducerRecord<String, String> record = new ProducerRecord<>("my-topic", "key-1", "Message for Ashish Mishra via Async");
+        ProducerRecord<String, String> record = new ProducerRecord<>("my-topic", CommonUtils.generateUniqueKey(), "Message for Ashish Mishra via Async");
 
         try {
             System.out.println("🟢 Sending record as Async...");
