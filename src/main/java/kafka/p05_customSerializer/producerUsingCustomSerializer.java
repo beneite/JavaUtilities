@@ -1,6 +1,7 @@
 package kafka.p05_customSerializer;
 
 import kafka.constantsClass.Constants;
+import kafka.utilities.CommonUtils;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
@@ -32,7 +33,7 @@ public class producerUsingCustomSerializer {
         Order order = new Order("Ashish Mishra","Nestle Maggi", 20);
 
         KafkaProducer<String, Order> producer = new KafkaProducer<>(properties);
-        ProducerRecord<String, Order> record = new ProducerRecord<>("my-topic", "key-1", order);
+        ProducerRecord<String, Order> record = new ProducerRecord<>("my-topic", CommonUtils.generateUniqueKey(), order);
 
         try{
             System.out.println("🟢 Sending record as Sync...");
