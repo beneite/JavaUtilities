@@ -12,4 +12,5 @@ public final class Constants {
     public static final String STRING_DESERIALIZER = "org.apache.kafka.common.serialization.StringDeserializer";
     public static final String KEY_DESERIALIZER = "key.deserializer";
     public static final String VALUE_DESERIALIZER = "value.deserializer";
+    public static final String PARTITIONER_CLASS = "partitioner.class";
 }
