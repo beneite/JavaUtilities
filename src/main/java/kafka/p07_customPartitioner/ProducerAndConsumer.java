@@ -2,12 +2,16 @@ package kafka.p07_customPartitioner;
 
 import kafka.constantsClass.Constants;
 import kafka.utilities.CommonUtils;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
+import org.apache.kafka.common.serialization.StringDeserializer;
+import org.apache.kafka.common.serialization.StringSerializer;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -32,17 +36,19 @@ public class ProducerAndConsumer {
     @Test
     public void producerAndConsumerCombined(){
         Properties producerProperties = new Properties();
-        producerProperties.setProperty(Constants.BOOTSTRAP_SERVER, Constants.LOCALHOST_29092);
-        producerProperties.setProperty(Constants.KEY_SERIALIZER, Constants.STRING_SERIALIZER);
-        producerProperties.setProperty(Constants.VALUE_SERIALIZER, Constants.STRING_SERIALIZER);
-        producerProperties.setProperty(Constants.PARTITIONER_CLASS, CustomPartitioner.class.getName());
+        producerProperties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, Constants.LOCALHOST_29092);
+        producerProperties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        producerProperties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        producerProperties.setProperty(ProducerConfig.PARTITIONER_CLASS_CONFIG, CustomPartitioner.class.getName());
 
         try (KafkaProducer<String, String> producer = new KafkaProducer<>(producerProperties)) {
-            ProducerRecord<String, String> record = new ProducerRecord<>(TOPIC_MULTI_PARTITIONER, CommonUtils.generateUniqueKey(), "Message for Ashish Mishra via sync");
+            String key = CommonUtils.generateUniqueKey();
+            ProducerRecord<String, String> record = new ProducerRecord<>(TOPIC_MULTI_PARTITIONER, key, "Message with key = "+key);
             System.out.println("🟢 Sending record as Sync...");
             RecordMetadata recordMetadata = producer.send(record).get();
 
             System.out.println("✅ Producer generated record: " + record);
+            System.out.println("✅ [Topic] " + recordMetadata.topic());
             System.out.println("✅ [Partition] " + recordMetadata.partition());
             System.out.println("✅ [Offset] " + recordMetadata.offset());
 
@@ -53,12 +59,14 @@ public class ProducerAndConsumer {
             System.out.println("🛑 Producer closed.");
         }
 
+        System.out.println("***************************************************************************************************************************************");
+
         Properties consumerProperties = new Properties();
-        consumerProperties.setProperty(Constants.BOOTSTRAP_SERVER, Constants.LOCALHOST_29092);
-        consumerProperties.setProperty(Constants.KEY_DESERIALIZER, Constants.STRING_DESERIALIZER);
-        consumerProperties.setProperty(Constants.VALUE_DESERIALIZER, Constants.STRING_DESERIALIZER);
-        consumerProperties.setProperty("auto.offset.reset", "earliest");
-        consumerProperties.setProperty("group.id", "simple-topic-group");
+        consumerProperties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, Constants.LOCALHOST_29092);
+        consumerProperties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        consumerProperties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        consumerProperties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        consumerProperties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, "simple-topic-group"+CommonUtils.generateUniqueKey()); // adding generateUniqueKey to consumer group so that everytime it is unique and start from starting
 
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(consumerProperties);
         consumer.subscribe(Collections.singletonList(TOPIC_MULTI_PARTITIONER));
@@ -66,8 +74,10 @@ public class ProducerAndConsumer {
         ConsumerRecords<String, String> consumerRecords = consumer.poll(Duration.ofSeconds(60));
         System.out.println("🟢 Consumer Online...");
         for(ConsumerRecord<String, String> consumerRecord : consumerRecords){
-            System.out.println("Topic name:"+consumerRecord.key());
-            System.out.println("partition value:"+consumerRecord.partition());
+            System.out.println("*********************************************");
+            System.out.println("✅ [Topic] "+consumerRecord.topic());
+            System.out.println("✅ [Partition] "+consumerRecord.partition());
+            System.out.println("✅ [Offset] "+consumerRecord.offset());
             System.out.println("Consumer key:"+consumerRecord.key());
             System.out.println("Consumer value:"+consumerRecord.value());
         }

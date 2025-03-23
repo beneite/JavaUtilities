@@ -1,6 +1,8 @@
 package kafka.p06_customDeserializer;
 
 import kafka.constantsClass.Constants;
+import kafka.utilities.CommonUtils;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -16,11 +18,11 @@ public class ConsumerUsingDeserializer {
     @Test
     public void consumingSetupAndConsumingMessage(){
         Properties properties = new Properties();
-        properties.setProperty(Constants.BOOTSTRAP_SERVER, Constants.LOCALHOST_29092);
-        properties.setProperty(Constants.KEY_DESERIALIZER, StringDeserializer.class.getName());
-        properties.setProperty(Constants.VALUE_DESERIALIZER, OrderDeserializer.class.getName());
-        properties.setProperty("auto.offset.reset", "earliest");
-        properties.setProperty("group.id", "simple-topic-group-new");
+        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, Constants.LOCALHOST_29092);
+        properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, OrderDeserializer.class.getName());
+        properties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, "simple-topic-group-new"+ CommonUtils.generateUniqueKey());
 
         KafkaConsumer<String, Order> consumer = new KafkaConsumer<>(properties);
         consumer.subscribe(Collections.singletonList("my-topic"));
