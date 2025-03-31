@@ -18,7 +18,7 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
 
-public class SyncCommits {
+public class AsyncCommit {
 
     /**
      * Synchronous commit (commitSync()) ensures that Kafka offsets are committed successfully before proceeding further.
@@ -76,7 +76,9 @@ public class SyncCommits {
                 System.out.println("Consumer key:" + consumerRecord.key());
                 System.out.println("Consumer value:" + consumerRecord.value());
             }
-            consumer.commitSync();
+            // TODO: onComplete() method is not printing logs.
+            // Commit all offsets after processing all records
+            consumer.commitAsync(new ConsumerCallback());
         }catch (Exception e){
             System.err.println("❌ Error in consuming record: " + e.getMessage());
             e.printStackTrace();
@@ -85,5 +87,4 @@ public class SyncCommits {
         }
 
     }
-
 }
