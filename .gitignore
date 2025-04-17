@@ -3,6 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 **src/main/java/jsonParsing/usingJacksonApi/RegionInformationData_**.json
+**src/main/java/CI_CD/jenkins/jenkinsSetupUsingDocker/volume_mapping/master
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
