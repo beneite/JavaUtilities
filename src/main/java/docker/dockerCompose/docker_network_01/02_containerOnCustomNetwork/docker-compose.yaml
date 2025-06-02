@@ -1,0 +1,18 @@
+version: "3"
+services:
+  nginx-container:
+    image: nginx
+    networks:
+      - ashish-network
+
+  alpine-container:
+    image: alpine
+    depends_on:
+      - nginx-container
+    entrypoint: "ping nginx-container"
+    networks:
+      - ashish-network
+
+networks:
+  ashish-network:
+    driver: bridge
