@@ -67,3 +67,54 @@ services:
     image: alpine
     depends_on:
       - nginx-container
+```
+# More on Docker network
+> In Docker, a **network** is a way to allow containers to communicate with each other, the host, or the internet. Docker provides several built-in networking options to support different use cases.
+
+### 🔧 Types of Docker Networks
+
+| Network Type      | Description                                                                                |
+| ----------------- | ------------------------------------------------------------------------------------------ |
+| **bridge**        | Default network for containers. Best for standalone containers on a single host.           |
+| **host**          | Shares the host’s network stack. No isolation. Only available on Linux.                    |
+| **none**          | Container is isolated from all networks. Useful for security.                              |
+| **overlay**       | Enables multi-host communication using Docker Swarm.                                       |
+| **macvlan**       | Assigns a MAC address to container, making it appear as a physical device on the network.  |
+| **custom bridge** | User-defined bridge network. Containers can communicate using names (DNS-based discovery). |
+
+---
+
+### 🛠 Common Docker Network Commands
+
+```bash
+# List all networks
+docker network ls
+
+# Create a custom bridge network
+docker network create my-network
+
+# Run container in a specific network
+docker run -d --name container1 --network my-network nginx
+
+# Connect a running container to a network
+docker network connect my-network container2
+
+# Disconnect a container from a network
+docker network disconnect my-network container2
+
+# Inspect network details
+docker network inspect my-network
+
+# Remove a network
+docker network rm my-network
+```
+
+---
+
+### 💡 Notes
+
+* Containers on the **same custom bridge** can communicate by container name (DNS).
+* **Default `bridge`** network does not support container name resolution — use `--link` or better, a custom bridge.
+* Use **overlay networks** for **Docker Swarm** or multi-host setups.
+
+---
