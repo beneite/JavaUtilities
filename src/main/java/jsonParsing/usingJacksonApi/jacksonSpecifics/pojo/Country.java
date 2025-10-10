@@ -1,5 +1,6 @@
 package jsonParsing.usingJacksonApi.jacksonSpecifics.pojo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,13 +8,13 @@ import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
 @Getter
-public class CountryParameters {
+@Setter
+public class Country {
 
-    private String capital;
-    private Long mintemp;
-    private Long maxtemp;
-    private Long currency;
-    private Long population;
+    private String country;
+
+    @JsonProperty("data")
+    private Data data;
+
 }
