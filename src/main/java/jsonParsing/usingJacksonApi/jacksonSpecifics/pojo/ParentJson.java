@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Getter
 @Setter
@@ -16,5 +18,5 @@ public class ParentJson {
     private String region;
 
     @JsonProperty("countries")
-    private CountriesArray countriesArray;
+    private List<Country> countries;
 }
