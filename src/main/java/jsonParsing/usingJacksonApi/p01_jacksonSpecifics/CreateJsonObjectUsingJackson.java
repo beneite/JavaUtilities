@@ -1,4 +1,4 @@
-package jsonParsing.usingJacksonApi.jacksonSpecifics;
+package jsonParsing.usingJacksonApi.p01_jacksonSpecifics;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package jsonParsing.usingJacksonApi.jacksonSpecifics.pojo;
+package jsonParsing.usingJacksonApi.p01_jacksonSpecifics.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

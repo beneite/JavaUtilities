@@ -1,4 +1,4 @@
-package jsonParsing.usingJacksonApi.p01_jacksonSpecifics.pojo;
+package jsonParsing.usingJacksonApi.p02_jacksonSpecifics.pojos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -10,11 +10,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Country {
+public class GeoDto {
 
-    private String country;
+    @JsonProperty("lat")
+    private String lat;
 
-    @JsonProperty("data")
-    private Data data;
-
+    @JsonProperty("lng")
+    private String lng;
 }
