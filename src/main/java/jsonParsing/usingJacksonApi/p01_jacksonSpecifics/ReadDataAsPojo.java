@@ -1,8 +1,8 @@
-package jsonParsing.usingJacksonApi.jacksonSpecifics;
+package jsonParsing.usingJacksonApi.p01_jacksonSpecifics;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jsonParsing.usingJacksonApi.jacksonSpecifics.pojo.Country;
-import jsonParsing.usingJacksonApi.jacksonSpecifics.pojo.ParentJson;
+import jsonParsing.usingJacksonApi.p01_jacksonSpecifics.pojo.Country;
+import jsonParsing.usingJacksonApi.p01_jacksonSpecifics.pojo.ParentJson;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
