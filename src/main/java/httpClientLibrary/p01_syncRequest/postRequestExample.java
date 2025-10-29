@@ -1,10 +1,9 @@
-package httpClientLibrary.p01_simpleRequest;
+package httpClientLibrary.p01_syncRequest;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
-import httpClientLibrary.p01_simpleRequest.pojos.PostRequestDto;
+import httpClientLibrary.p01_syncRequest.pojos.PostRequestDto;
 import org.testng.annotations.Test;
 
 import java.io.IOException;

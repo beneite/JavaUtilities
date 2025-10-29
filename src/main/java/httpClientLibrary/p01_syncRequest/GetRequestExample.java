@@ -1,7 +1,7 @@
-package httpClientLibrary.p01_simpleRequest;
+package httpClientLibrary.p01_syncRequest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import httpClientLibrary.p01_simpleRequest.pojos.GetAllUsersResponseDto;
+import httpClientLibrary.p01_syncRequest.pojos.GetAllUsersResponseDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.annotations.Test;
 
