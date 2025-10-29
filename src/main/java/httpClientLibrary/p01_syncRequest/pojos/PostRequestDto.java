@@ -1,4 +1,4 @@
-package httpClientLibrary.p01_simpleRequest.pojos;
+package httpClientLibrary.p01_syncRequest.pojos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,12 +10,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 @Getter
 @Setter
-@ToString
-public class GetAllUsersResponseDto {
+public class PostRequestDto {
 
-    private String id;
     private String firstName;
     private String lastName;
     private String email;
