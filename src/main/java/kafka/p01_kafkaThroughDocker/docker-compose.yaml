@@ -6,7 +6,7 @@ services:
       - "2181:2181"
 
   kafka-service:
-    image: bitnami/kafka:latest
+    image: soldevelo/kafka:latest
     container_name: kafka-container
     ports:
       - "9092:9092"
